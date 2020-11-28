@@ -1,0 +1,7 @@
+Description of the Solution:
+    Applying the ensemble of augmentations and using that as an metric for generalization.
+    We are checking whether the model's output changes after augmenting the image. A penalty is added if the model's output changes once the image is augmented.
+    The reason being that for humans are able to identify even after the object in the image even after the image is rotated/saturated.
+Motivation:
+    CNN Models are texture biased and [1] shows the some augmentations are really increasing the texture model of the model.
+[1] : The Origins and Prevalence of Texture Bias in Convolutional Neural Networks : https://arxiv.org/abs/1911.09071
