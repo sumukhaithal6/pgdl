@@ -16,7 +16,8 @@
 # Main contributor: Yiding Jiang, July 2020
 
 # This complexity compute a specific notion of sharpness of a function.
-
+# This is the runner up solution to the PGDL Competition 
+# Solution contributors: Sumukh Aithal, Dhruva Kashyap
 
 import numpy as np
 import tensorflow as tf
@@ -28,8 +29,6 @@ def complexity(model, dataset):
     score = 0.0
 
     def random_erase_np_v2(images , probability = 1, sl = 0.02, sh = 0.4, r1 = 0.3):
-
-        # print(images)
         images = images.numpy()
         res = []
         for img in images:
@@ -70,6 +69,7 @@ def complexity(model, dataset):
         return logits
 
     batch_size = 64
+    MAX_INDEX = 200
     grayscale = False
     for index, (x, y) in enumerate(dataset.batch(batch_size)):
 
@@ -103,9 +103,8 @@ def complexity(model, dataset):
         # x = tf.image.central_crop(x,0.95)
         # x = tf.add(x,gnoise)
         # x = tf.image.random_saturation(x, 0.6, 1.6)
-
-        # print(tf.shape(x))
         # x = tf.image.resize_with_pad(x,32,32)
+        
         logits_1 = tf.nn.softmax(predict(x1), axis=1)
         logits_2 = tf.nn.softmax(predict(x2), axis=1)
         logits_3 = tf.nn.softmax(predict(x3), axis=1)
@@ -135,7 +134,7 @@ def complexity(model, dataset):
 
         prob_7 = tf.reduce_max(logits_7, axis=-1)
         pred_7 = tf.cast(tf.argmax(logits_7, axis=-1), tf.int32)
-        # # score+=tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=logits_1)
+        # # score += tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=logits_1)
         prob_orig = tf.reduce_max(logits_orig, axis=-1)
         pred_orig = tf.cast(tf.argmax(logits_orig, axis=-1), tf.int32) 
 
@@ -168,7 +167,7 @@ def complexity(model, dataset):
                 score += (tf.abs(prob_orig[idx]-prob_7[idx]))
             else:
                 score += 2
-        if index == 200:
+        if index == MAX_INDEX:
             break
     score = score.numpy()
     return -score
