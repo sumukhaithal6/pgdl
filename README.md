@@ -13,7 +13,21 @@ The proposed method was the first runner up solution for the competition "Predic
 - scikit-learn
 
 # How to Run
+```
 python ingestion_program/ingestion.py PATH_TO_DATA runner_up_solution
+```
+Please refer to the starting kit provided by [PGDL Competition](https://competitions.codalab.org/competitions/25301#learn_the_details-get_starting_kit) for more instructions on how to run the code.
 
-# Acknowlowdegments:
+```complexity.py``` contains the proposed solution.\
+For details about the datasets and the competition, please refer to [this repository](https://github.com/google-research/google-research/tree/master/pgdl).
+# BibTeX
+For more details please refer to our [paper](https://arxiv.org/abs/2101.06459).
+```
+       @article{aithal2021robustness,
+        title={Robustness to Augmentations as a Generalization metric.},
+        author={Aithal, Sumukh and Kashyap, Dhruva and Subramanyam, Natarajan},
+        journal={arXiv preprint arXiv:2101.06459},
+        year={2021}
+        }
+```
 
